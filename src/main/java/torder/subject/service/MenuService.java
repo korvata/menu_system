@@ -16,7 +16,7 @@ public class MenuService {
     public List<Menu> findMenus() {
         return menuRepository.findAll();
     }
-    public Menu findOne(Long menuId) {
+    public Menu findOne(String menuId) {
         return menuRepository.findOne(menuId);
     }
 }
