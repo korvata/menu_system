@@ -3,8 +3,17 @@
 <head>
     <title>장바구니</title>
 </head>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
     function cancelMenu(){
+        var checkArr = [];
+        $("input[name='menuId']:checked").each(function(i) {
+            var i = $(this).parents("tr");
+            var e = i.next("tr");
+            i.remove();
+            e.remove();
+        });
+
 
     }
 </script>
@@ -14,16 +23,17 @@
         <table>
             <thead>
             <tr>
+                <th>#</th>
                 <th>메뉴명</th>
                 <th>가격</th>
-                <th></th>
             </tr>
             </thead>
-            <tbody> <tr th:each="cart : ${carts}">
-                <td th:text="${cart.menu.name}"></td>
-                <td th:text="${cart.menu.price}"></td>
-                <td><button th:id="${cart.menu.id}" onclick="cancelMenu()" type="submit">취소</button></td>
-            </tr>
+            <tbody>
+                <tr th:each="cart : ${carts}"  th:id="${cart.menu.id}">
+                    <td><input type="checkbox" th:name="menuId" th:value="${cart.menu.id}" class="form-check-input"></td>
+                    <td th:text="${cart.menu.name}"></td>
+                    <td th:text="${cart.menu.price}"></td>
+                </tr>
             </tbody>
         </table>
         <table>
@@ -31,6 +41,7 @@
             <tr>
                 <th>총 가격</th>
                 <th> </th>
+                <th><button id="cartBtn1" onclick="cancelMenu()" type="submit">메뉴취소</button></th>
             </tr>
             </thead>
         </table>
