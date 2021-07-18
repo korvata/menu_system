@@ -20,6 +20,7 @@ public class CartController {
     private final MenuService menuService;
     List<Cart> carts = new ArrayList<>();
 
+    //장바구니 담기
     @PostMapping("/cart")
     @ResponseBody
     public void create(@RequestParam(value = "menuArr[]") List<String> menuArr, Model model) {
