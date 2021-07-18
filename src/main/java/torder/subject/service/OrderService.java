@@ -19,7 +19,7 @@ public class OrderService {
 
     //주문
     @Transactional
-    public Long order(String memberId, Long menuId, List<Cart> carts) {
+    public Long order(String memberId, List<Cart> carts) {
         //엔티티 조회
         Member member = memberRepository.findOne(memberId);
 
