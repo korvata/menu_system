@@ -1,22 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
+<script>
+    function popUp() {
+        var pop;
+        pop = window.open("cart", "pop", "width=570, height=420, scrollbars=yes");
+    }
+</script>
 <div class="container">
     <div>
-        <table class="table table-striped">
+        <table>
             <thead>
             <tr>
+                <th>#</th>
                 <th>메뉴명</th>
                 <th>가격</th>
                 <th></th>
             </tr>
             </thead>
             <tbody> <tr th:each="menu : ${menus}">
+                <td><input type="checkbox" id=${menu.id} name="open" class="form-check-input"></td>
                 <td th:text="${menu.name}"></td>
                 <td th:text="${menu.price}"></td>
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button onclick="popUp()" type="submit">장바구니</button>
+        </div>
     </div>
 </div> <!-- /container -->
 </body>
