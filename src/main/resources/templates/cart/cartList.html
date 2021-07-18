@@ -3,6 +3,11 @@
 <head>
     <title>장바구니</title>
 </head>
+<script>
+    function cancelMenu(){
+
+    }
+</script>
 <body>
 <div class="container">
     <div>
@@ -11,14 +16,13 @@
             <tr>
                 <th>메뉴명</th>
                 <th>가격</th>
-                <th>수량</th>
                 <th></th>
             </tr>
             </thead>
             <tbody> <tr th:each="cart : ${carts}">
                 <td th:text="${cart.menu.name}"></td>
                 <td th:text="${cart.menu.price}"></td>
-                <td th:text="${cart.count}"></td>
+                <td><button th:id="${cart.menu.id}" onclick="cancelMenu()" type="submit">취소</button></td>
             </tr>
             </tbody>
         </table>
