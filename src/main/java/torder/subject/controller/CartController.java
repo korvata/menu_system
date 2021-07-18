@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import torder.subject.domain.Cart;
 import torder.subject.domain.Menu;
 import torder.subject.service.MenuService;
 
@@ -19,26 +21,33 @@ import java.util.List;
 public class CartController {
 
     private final MenuService menuService;
+    List<Cart> carts = new ArrayList<>();
 
     @PostMapping("/cart")
     @ResponseBody
-    public String create(@RequestParam(value = "menuArr[]") List<String> menuArr, Model model) {
-
+    public void create(@RequestParam(value = "menuArr[]") List<String> menuArr, Model model) {
 
         for(String menu : menuArr){
             log.info(menu);
         }
-        log.info("cartList");
-
-        List<Menu> menus = new ArrayList<>();
 
         for(String menuId : menuArr){
-            Menu menu = menuService.findOne(menuId);
-            menus.add(menu);
+            Cart cart = new Cart();
+            cart.setMenu(menuService.findOne(menuId));
+            cart.setCount(1);
+            carts.add(cart);
         }
 
-        model.addAttribute("menus", menus);
+        log.info("cart created!");
+    }
 
+    //카트 목록
+    @GetMapping("/cart")
+    public String cartList(Model model) {
+
+        model.addAttribute("carts", carts);
+
+        log.info("cartList");
         return "cart/cartList";
     }
 }

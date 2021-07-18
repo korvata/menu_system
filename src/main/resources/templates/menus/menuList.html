@@ -20,6 +20,10 @@ function checkboxArr() {
         }
     });
 }
+
+function cart() {
+    location.href = 'cart';
+}
 </script>
 <body>
 <div class="container">
@@ -43,7 +47,8 @@ function checkboxArr() {
     </div>
     <div class="row">
         <div class="col">
-            <button id="cartBtn" onclick="checkboxArr()" type="submit">장바구니</button>
+            <button id="cartBtn1" onclick="checkboxArr()" type="submit">장바구니 담기</button>
+            <button id="cartBtn2" onclick="cart()" type="submit">장바구니 이동</button>
         </div>
     </div>
 </div> <!-- /container -->
