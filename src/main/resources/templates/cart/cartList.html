@@ -13,8 +13,22 @@
             i.remove();
             e.remove();
         });
+    }
 
+    function order() {
+        var checkArr = [];
+        $("input[name='menuId']:checked").each(function(i) {
+            checkArr.push($(this).val());
+        });
 
+        $.ajax({
+            url: '/order'
+            , type: 'post'
+            , dataType: 'text'
+            , data: {
+                menuArr: checkArr
+            }
+        });
     }
 </script>
 <body>
@@ -48,7 +62,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <a class="btn btn-lg btn-dark" href="/orders">주문</a>
+            <button id="order" onclick="order()" type="submit">주문</button>
         </div>
         <div class="col">
             <a class="btn btn-lg btn-dark" href="/menus">메뉴</a>
