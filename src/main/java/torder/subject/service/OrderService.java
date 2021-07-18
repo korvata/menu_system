@@ -41,4 +41,9 @@ public class OrderService {
 
         return order.getId();
     }
+
+    //주문내역
+    public List<Order> findAll(){
+        return orderRepository.findAll();
+    }
 }
