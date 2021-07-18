@@ -3,9 +3,26 @@
 <head>
     <title>메뉴목록</title>
 </head>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+function checkboxArr() {
+    var checkArr = [];
+    $("input[name='menuId']:checked").each(function(i) {
+        checkArr.push($(this).val());
+    });
+
+    $.ajax({
+        url: '/cart'
+        , type: 'post'
+        , dataType: 'text'
+        , data: {
+            menuArr: checkArr
+        }
+    });
+}
+</script>
 <body>
 <div class="container">
-    <form role="form" action="/cart" th:object="${CheckedId}" method="post">
     <div>
         <table>
             <thead>
@@ -17,20 +34,18 @@
             </tr>
             </thead>
             <tbody> <tr th:each="menu : ${menus}">
-                <td><input type="checkbox" th:name="menuId" th:id="${menu.id}" class="form-check-input"></td>
+                <td><input type="checkbox" th:name="menuId" th:id="${menu.id}" th:value="${menu.id}" class="form-check-input"></td>
                 <td th:text="${menu.name}" ></td>
                 <td th:text="${menu.price}"></td>
-                <td style="display: none;" th:value="${menu.id}"></td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="row">
         <div class="col">
-            <button id="cartSubmit" onclick="cartPop()" type="submit">장바구니</button>
+            <button id="cartBtn" onclick="checkboxArr()" type="submit">장바구니</button>
         </div>
     </div>
-    </form>
 </div> <!-- /container -->
 </body>
 </html>
