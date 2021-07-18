@@ -19,7 +19,7 @@ public class MenuController {
 
     //메뉴 목록
     @GetMapping("/menus")
-    public String list(Model model) {
+    public String menuList(Model model) {
         List<Menu> menus = menuService.findMenus();
         model.addAttribute("menus", menus);
         log.info("menu list");
