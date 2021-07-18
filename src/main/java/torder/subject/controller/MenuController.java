@@ -22,7 +22,7 @@ public class MenuController {
     public String menuList(Model model) {
         List<Menu> menus = menuService.findMenus();
         model.addAttribute("menus", menus);
-        log.info("menu list");
+        log.info("menuList");
         return "menus/menuList";
     }
 }
