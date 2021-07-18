@@ -2,13 +2,14 @@ package torder.subject.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import torder.subject.domain.Cart;
-import torder.subject.domain.Member;
 import torder.subject.domain.Order;
 import torder.subject.repository.MemberRepository;
 import torder.subject.service.OrderService;
@@ -41,6 +42,15 @@ public class OrderController {
 
         log.info("order success!");
         log.info("orderId = {}", orderId);
+    }
+
+    //주문 내역
+    @GetMapping("/order")
+    public String orderList(Model model) {
+        List<Order> menus = orderService.
+        model.addAttribute("menus", menus);
+        log.info("menu page");
+        return "menus/menuList";
     }
 
 
