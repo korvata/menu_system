@@ -1,6 +1,8 @@
 package torder.subject.login;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+@Slf4j
+@Controller
 @RequiredArgsConstructor
 public class LoginController {
     private final LoginService loginService;
@@ -29,7 +32,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute LoginForm form, BindingResult bindingResult,
+    public String loginV4(@ModelAttribute LoginForm form, BindingResult bindingResult,
                           @RequestParam(defaultValue = "/") String redirectURL,
                           HttpServletRequest request) {
 
@@ -54,8 +57,9 @@ public class LoginController {
 
     }
 
+
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    public String logoutV3(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
