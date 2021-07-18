@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>장바구니</title>
+</head>
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>메뉴명</th>
+                <th>가격</th>
+                <th>수량</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody> <tr th:each="cart : ${carts}">
+                <td th:text="${cart.menu.name}"></td>
+                <td th:text="${cart.menu.price}"></td>
+                <td th:text="${cart.count}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th>총 가격</th>
+                <th> </th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-lg btn-dark" href="/orders">주문</a>
+        </div>
+        <div class="col">
+            <a class="btn btn-lg btn-dark" href="/menus">메뉴</a>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
