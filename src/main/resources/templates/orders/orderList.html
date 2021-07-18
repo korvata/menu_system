@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>주문내역</title>
+</head>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+
+</script>
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>주문번호</th>
+                <th>주문내역</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orders}">
+                    <td><input type="checkbox" th:name="orderId" th:id="${order.id}" th:value="${order.id}" class="form-check-input"></td>
+                    <td th:text="${order.id}" ></td>
+                    <td>
+                        <tr th:each="orderMenu : ${order.orderMenus}">
+                            <td th:text="${orderMenu.menu.name}" ></td>
+                            <td th:text="${orderMenu.count}" ></td>
+                        </tr>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button id="paymentBtn" onclick="payment()" type="submit">결제</button>
+            <button id="paymentHistoryBtn" onclick="paymentHistory()" type="submit">장바구니 이동</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
+
