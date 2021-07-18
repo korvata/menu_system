@@ -11,7 +11,7 @@ public class LoginService {
 
     private final MemberRepository memberRepository;
 
-    //로그인 실패시 null
+    //로그인
     public Member login(String loginId, String password) {
         return memberRepository.findByLoginId(loginId)
                 .filter(m -> m.getPwd().equals(password))

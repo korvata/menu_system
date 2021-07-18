@@ -22,23 +22,24 @@ public class HomeController {
     private final LoginService loginService;
 
     @GetMapping("/")
-    public String homeLoginV3(HttpServletRequest request, Model model, @ModelAttribute("loginForm") LoginForm form) {
+    public String login(HttpServletRequest request, Model model, @ModelAttribute("loginForm") LoginForm form) {
 
         HttpSession session = request.getSession(false);
         if (session == null) {
+            log.info("login controller");
             return "login/loginForm";
         }
 
         Member loginMember = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        //세션에 회원 데이터가 없으면 home
+        //세션에 회원 데이터가 없으면 로그인 화면으로 이동
         if (loginMember == null) {
+            log.info("login controller");
             return "login/loginForm";
         }
 
-        //세션이 유지되면 로그인으로 이동
         model.addAttribute("member", loginMember);
-        return "loginHome";
+        return "menus/menuList";
     }
 
 }
