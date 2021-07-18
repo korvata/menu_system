@@ -30,6 +30,10 @@
             }
         });
     }
+
+    function orderHistory() {
+        location.href = 'order';
+    }
 </script>
 <body>
 <div class="container">
@@ -63,6 +67,9 @@
     <div class="row">
         <div class="col">
             <button id="order" onclick="order()" type="submit">주문</button>
+        </div>
+        <div class="col">
+            <button id="orderHistory" onclick="orderHistory()" type="submit">주문내역</button>
         </div>
         <div class="col">
             <a class="btn btn-lg btn-dark" href="/menus">메뉴</a>
