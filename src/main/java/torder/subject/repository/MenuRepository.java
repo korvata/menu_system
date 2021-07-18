@@ -23,6 +23,6 @@ public class MenuRepository {
         return em.find(Menu.class, id);
     }
     public List<Menu> findAll() {
-        return em.createQuery("select i from Item i",Menu.class).getResultList();
+        return em.createQuery("select i from Menu i",Menu.class).getResultList();
     }
 }
