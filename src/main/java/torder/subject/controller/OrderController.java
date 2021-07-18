@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import torder.subject.domain.Cart;
+import torder.subject.domain.Menu;
 import torder.subject.domain.Order;
 import torder.subject.repository.MemberRepository;
+import torder.subject.repository.MenuRepository;
 import torder.subject.service.OrderService;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-    private final MemberRepository memberRepository;
+    private final MenuRepository menuRepository;
 
     //주문
     @PostMapping("/order")
@@ -37,6 +39,13 @@ public class OrderController {
         }
 
         List<Cart> carts = new ArrayList<>();
+
+        for(String menuId : menuArr){
+            Cart cart = new Cart();
+            cart.setMenu(menuRepository.findOne(menuId));
+            cart.setCount(1);
+            carts.add(cart);
+        }
 
         Long orderId = orderService.order(memberId, carts);
 
