@@ -47,10 +47,10 @@ public class OrderController {
     //주문 내역
     @GetMapping("/order")
     public String orderList(Model model) {
-        List<Order> menus = orderService.
-        model.addAttribute("menus", menus);
-        log.info("menu page");
-        return "menus/menuList";
+        List<Order> orders = orderService.findAll();
+        model.addAttribute("orders", orders);
+        log.info("order page");
+        return "orders/orderList";
     }
 
 
