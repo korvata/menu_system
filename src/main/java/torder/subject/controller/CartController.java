@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import torder.subject.domain.Cart;
 import torder.subject.domain.Menu;
 import torder.subject.service.MenuService;
@@ -27,6 +24,8 @@ public class CartController {
     @ResponseBody
     public void create(@RequestParam(value = "menuArr[]") List<String> menuArr, Model model) {
 
+        log.info("cartList");
+
         for(String menu : menuArr){
             log.info(menu);
         }
@@ -41,13 +40,13 @@ public class CartController {
         log.info("cart created!");
     }
 
-    //카트 목록
+    //장바구니 목록
     @GetMapping("/cart")
     public String cartList(Model model) {
 
         model.addAttribute("carts", carts);
 
-        log.info("cartList");
+        log.info("cart page");
         return "cart/cartList";
     }
 }
