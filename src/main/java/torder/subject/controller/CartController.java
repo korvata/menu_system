@@ -57,9 +57,16 @@ public class CartController {
     public String cartList(Model model
             , @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
 
-        List<Cart> newCart = new ArrayList<>();
+        List<Cart> menus = new ArrayList<>();
 
-        model.addAttribute("carts", carts);
+        for(Long key : carts.keySet()){
+            Cart cart = new Cart();
+            cart.setMenu(menuService.findOne(key));
+            cart.setCount(carts.get(key));
+            menus.add(cart);
+        }
+
+        model.addAttribute("carts", menus);
 
         log.info("memberID = {}", loginMember.getId());
         log.info("cart page");

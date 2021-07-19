@@ -48,11 +48,11 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="cart : ${carts}"  th:id="${cart.key.id}">
-                    <td><input type="checkbox" th:name="menuId" th:value="${cart.key.id}" class="form-check-input"></td>
-                    <td th:text="${cart.key.name}"></td>
-                    <td th:text="${cart.key.price}"></td>
-                    <td th:text="${cart.value}"></td>
+                <tr th:each="cart : ${carts}"  th:id="${cart.menu.id}">
+                    <td><input type="checkbox" th:name="menuId" th:value="${cart.menu.id}" class="form-check-input"></td>
+                    <td th:text="${cart.menu.name}"></td>
+                    <td th:text="${cart.menu.price}"></td>
+                    <td th:text="${cart.count}"></td>
                 </tr>
             </tbody>
         </table>
