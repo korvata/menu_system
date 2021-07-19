@@ -8,10 +8,18 @@
     function cancelMenu(){
         var checkArr = [];
         $("input[name='menuId']:checked").each(function(i) {
+            checkArr.push($(this).val());
             var i = $(this).parents("tr");
-            var e = i.next("tr");
             i.remove();
-            e.remove();
+        });
+
+        $.ajax({
+            url: '/cartcancel'
+            , type: 'post'
+            , dataType: 'text'
+            , data: {
+                menuArr: checkArr
+            }
         });
     }
 
