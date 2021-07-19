@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import torder.subject.domain.Cart;
+import torder.subject.domain.Member;
 import torder.subject.service.MenuService;
+import torder.subject.session.SessionConst;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,11 @@ public class CartController {
     //장바구니 담기
     @PostMapping("/cart")
     @ResponseBody
-    public void create(@RequestParam(value = "menuArr[]") List<String> menuArr, Model model) {
+    public void create(@RequestParam(value = "menuArr[]") List<String> menuArr
+            , Model model
+            , @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
 
+        log.info("memberID = {}", loginMember.getId());
         log.info("cartList");
 
         for(String menu : menuArr){
@@ -42,10 +47,12 @@ public class CartController {
 
     //장바구니 목록
     @GetMapping("/cart")
-    public String cartList(Model model) {
+    public String cartList(Model model
+            , @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
 
         model.addAttribute("carts", carts);
 
+        log.info("memberID = {}", loginMember.getId());
         log.info("cart page");
         return "cart/cartList";
     }

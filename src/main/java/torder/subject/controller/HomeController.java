@@ -20,7 +20,7 @@ public class HomeController {
             return "index";
         }
 
-        log.info(loginMember.getId());
+        log.info("memberID = {}", loginMember.getId());
         model.addAttribute("member", loginMember);
         return "menus/menuList";
     }
