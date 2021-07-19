@@ -21,7 +21,7 @@ import java.util.List;
 public class CartController {
 
     private final MenuService menuService;
-    HashMap<Menu, Integer> carts = new HashMap<>();
+    HashMap<Long, Integer> carts = new HashMap<>();
 
     //장바구니 담기
     @PostMapping("/cart")
@@ -38,15 +38,15 @@ public class CartController {
         }
 
         for(Long menuId : menuArr){
-            if(carts.containsKey(menuService.findOne(menuId))){
-                carts.put(menuService.findOne(menuId), carts.get(menuService.findOne(menuId))+1);
+            if(carts.containsKey(menuId)){
+                carts.put(menuId, carts.get(menuId)+1);
             }else{
-                carts.put(menuService.findOne(menuId), 1);
+                carts.put(menuId, 1);
             }
         }
 
-        for(Menu key : carts.keySet()){
-            log.info("menu : {}, count : {}", key.getId(), carts.get(key));
+        for(Long key : carts.keySet()){
+            log.info("menu : {}, count : {}", key, carts.get(key));
         }
 
         log.info("cart created!");
