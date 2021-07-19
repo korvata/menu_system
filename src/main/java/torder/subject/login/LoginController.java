@@ -1,4 +1,4 @@
-package torder.subject.controller;
+package torder.subject.login;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute LoginForm form, BindingResult bindingResult,
-                        @RequestParam(defaultValue = "/") String redirectURL,
                         HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
@@ -49,6 +48,5 @@ public class LoginController {
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
         return "menus/menuList";
-
     }
 }
