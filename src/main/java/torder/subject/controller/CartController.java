@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import torder.subject.domain.Cart;
 import torder.subject.domain.Member;
+import torder.subject.domain.Menu;
 import torder.subject.service.MenuService;
 import torder.subject.session.SessionConst;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -19,27 +21,32 @@ import java.util.List;
 public class CartController {
 
     private final MenuService menuService;
-    List<Cart> carts = new ArrayList<>();
+    HashMap<Menu, Integer> carts = new HashMap<>();
 
     //장바구니 담기
     @PostMapping("/cart")
     @ResponseBody
-    public void create(@RequestParam(value = "menuArr[]") List<String> menuArr
+    public void create(@RequestParam(value = "menuArr[]") List<Long> menuArr
             , Model model
             , @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
 
         log.info("memberID = {}", loginMember.getId());
         log.info("cartList");
 
-        for(String menu : menuArr){
-            log.info(menu);
+        for(Long menuId : menuArr){
+            log.info("{}",menuId);
         }
 
-        for(String menuId : menuArr){
-            Cart cart = new Cart();
-            cart.setMenu(menuService.findOne(menuId));
-            cart.setCount(1);
-            carts.add(cart);
+        for(Long menuId : menuArr){
+            if(carts.containsKey(menuService.findOne(menuId))){
+                carts.put(menuService.findOne(menuId), carts.get(menuService.findOne(menuId))+1);
+            }else{
+                carts.put(menuService.findOne(menuId), 1);
+            }
+        }
+
+        for(Menu key : carts.keySet()){
+            log.info("menu : {}, count : {}", key.getId(), carts.get(key));
         }
 
         log.info("cart created!");
@@ -49,6 +56,8 @@ public class CartController {
     @GetMapping("/cart")
     public String cartList(Model model
             , @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+
+        List<Cart> newCart = new ArrayList<>();
 
         model.addAttribute("carts", carts);
 

@@ -30,17 +30,17 @@ public class OrderController {
     //주문
     @PostMapping("/order")
     @ResponseBody
-    public void order(@RequestParam(value = "menuArr[]") List<String> menuArr) {
+    public void order(@RequestParam(value = "menuArr[]") List<Long> menuArr) {
 
         String memberId = "yjh";//임시 사용자ID
 
-        for(String menu : menuArr){
-            log.info(menu);
+        for(Long menu : menuArr){
+            log.info("{}",menu);
         }
 
         List<Cart> carts = new ArrayList<>();
 
-        for(String menuId : menuArr){
+        for(Long menuId : menuArr){
             Cart cart = new Cart();
             cart.setMenu(menuRepository.findOne(menuId));
             cart.setCount(1);

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Menu {
 
     @Id
-    private String id;      //메뉴ID
+    private Long id;      //메뉴ID
 
     private String name;    //메뉴이름
     private int price;      //메뉴가격

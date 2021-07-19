@@ -19,7 +19,7 @@ public class MenuRepository {
             em.merge(menu);
         }
     }
-    public Menu findOne(String id) {
+    public Menu findOne(Long id) {
         return em.find(Menu.class, id);
     }
     public List<Menu> findAll() {
