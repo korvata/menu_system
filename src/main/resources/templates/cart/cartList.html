@@ -25,19 +25,24 @@
 
     function order() {
         var checkArr = [];
+        var checkMenuId = [];
+        var checkCount = [];
         $("input[name='menuId']:checked").each(function(i) {
-            checkArr.push($(this).val());
-            var i = $(this).parents("tr");
-            i.remove();
+            checkMenuId.push($(this).val());
+            checkCount.push($(this).parents("tr").children().eq(3).text());
         });
+
+        var Data = {
+            "menuId": checkMenuId,
+            "count": checkCount
+            }
+
 
         $.ajax({
             url: '/order'
             , type: 'post'
-            , dataType: 'text'
-            , data: {
-                menuArr: checkArr
-            }
+            , data: Data
+            , success: cancelMenu()
         });
     }
 
@@ -57,7 +62,7 @@
                 <th>수량</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody th:id="cartTable">
                 <tr th:each="cart : ${carts}"  th:id="${cart.menu.id}">
                     <td><input type="checkbox" th:name="menuId" th:value="${cart.menu.id}" class="form-check-input"></td>
                     <td th:text="${cart.menu.name}"></td>
