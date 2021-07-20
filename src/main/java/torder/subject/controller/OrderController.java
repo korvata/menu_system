@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import torder.subject.domain.*;
 import torder.subject.repository.MemberRepository;
 import torder.subject.repository.MenuRepository;
+import torder.subject.service.MenuService;
 import torder.subject.service.OrderService;
 import torder.subject.session.SessionConst;
 
@@ -21,7 +22,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-    private final MenuRepository menuRepository;
+    private final MenuService menuService;
 
     //주문
     @PostMapping("/order")
@@ -41,7 +42,7 @@ public class OrderController {
 
         for(int i=0; i < cnts.size(); i++){
             Cart cart = new Cart();
-            cart.setMenu(menuRepository.findOne(ids.get(i)));
+            cart.setMenu(menuService.findOne(ids.get(i)));
             cart.setCount(cnts.get(i));
 
             carts.add(cart);
@@ -55,8 +56,9 @@ public class OrderController {
 
     //주문 내역
     @GetMapping("/order")
-    public String orderList(Model model) {
-        List<Order> orders = orderService.findAll();
+    public String orderList(Model model,
+                            @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        List<Order> orders = orderService.notPayedOrderList(loginMember);
 
         for(Order order : orders){
             for(OrderMenu orderMenu : order.getOrderMenus()){

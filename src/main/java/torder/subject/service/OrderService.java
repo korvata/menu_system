@@ -7,6 +7,7 @@ import torder.subject.domain.*;
 import torder.subject.repository.MemberRepository;
 import torder.subject.repository.OrderRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,8 +43,28 @@ public class OrderService {
         return order.getId();
     }
 
-    //주문내역
+    //단일 주문건 조회
+    public Order findOne(Long orderId){
+        return orderRepository.findOne(orderId);
+    }
+
+    //전체 주문내역
     public List<Order> findAll(){
         return orderRepository.findAll();
+    }
+
+    //결제되지 않은 주문 내역만 조회
+    public List<Order> notPayedOrderList(Member member){
+        List<Order> orders = orderRepository.findAll();
+
+        List<Order> orderList = new ArrayList<>();
+
+        for(Order order : orders){
+            if(order.getMember().equals(member) && order.getPayment().getStatus().equals(PaymentStatus.N)){
+                orderList.add(order);
+            }
+        }
+
+        return orderList;
     }
 }
