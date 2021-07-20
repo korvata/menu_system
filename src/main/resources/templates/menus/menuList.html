@@ -5,25 +5,32 @@
 </head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-function checkboxArr() {
-    var checkArr = [];
-    $("input[name='menuId']:checked").each(function(i) {
-        checkArr.push($(this).val());
-    });
+    function checkboxArr() {
+        var checkArr = [];
+        $("input[name='menuId']:checked").each(function(i) {
+            checkArr.push($(this).val());
+        });
 
-    $.ajax({
-        url: '/cart'
-        , type: 'post'
-        , dataType: 'text'
-        , data: {
-            menuArr: checkArr
-        }
-    });
-}
+        $.ajax({
+            url: '/cart'
+            , type: 'post'
+            , dataType: 'text'
+            , data: {
+                menuArr: checkArr
+            }
+        });
+    }
 
-function cartList() {
-    location.href = 'cart';
-}
+    function cartList() {
+        location.href = 'cart';
+    }
+
+    function logOut(){
+        $.ajax({
+            url: '/logout'
+            , type: 'post'
+        });
+    }
 </script>
 <body>
 <div class="container">
@@ -48,9 +55,10 @@ function cartList() {
     <div class="row">
         <div class="col">
             <button id="cartBtn1" onclick="checkboxArr()" type="submit">장바구니 담기</button>
-            <button id="cartBtn2" onclick="goCart()" type="submit">장바구니 이동</button>
+            <button id="cartBtn2" onclick="cartList()" type="submit">장바구니 이동</button>
         </div>
     </div>
+    <div><button id="logOut" onclick="logOut()" type="submit">로그아웃</button></div>
 </div> <!-- /container -->
 </body>
 </html>
