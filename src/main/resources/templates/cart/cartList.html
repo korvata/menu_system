@@ -49,6 +49,10 @@
     function orderHistory() {
         location.href = 'order';
     }
+
+    function goMenu() {
+        location.href = 'menus';
+    }
 </script>
 <body>
 <div class="container">
@@ -89,7 +93,7 @@
             <button id="orderHistory" onclick="orderHistory()" type="submit">주문내역</button>
         </div>
         <div class="col">
-            <a class="btn btn-lg btn-dark" href="/menus">메뉴</a>
+            <button id="menuBtn" onclick="goMenu()" type="submit">메뉴</button>
         </div>
     </div>
 </div> <!-- /container -->
