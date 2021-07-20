@@ -5,7 +5,9 @@
 </head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-
+    function goCart() {
+        location.href = 'cart';
+    }
 </script>
 <body>
 <div class="container">
@@ -22,12 +24,16 @@
             <tbody>
                 <tr th:each="order : ${orders}">
                     <td><input type="checkbox" th:name="orderId" th:id="${order.id}" th:value="${order.id}" class="form-check-input"></td>
-                    <td th:text="${order.id}" ></td>
+                    <td th:text="${order.id}"></td>
                     <td>
-                        <tr th:each="orderMenu : ${order.orderMenus}">
-                            <td th:text="${orderMenu.menu.name}" ></td>
-                            <td th:text="${orderMenu.count}" ></td>
-                        </tr>
+                        <table>
+                            <tbody>
+                                <tr th:each="orderMenu : ${order?.orderMenus}">
+                                    <td th:text="${orderMenu?.menu?.name}"></td>
+                                    <td th:text="${orderMenu?.count}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
             </tbody>
@@ -36,7 +42,12 @@
     <div class="row">
         <div class="col">
             <button id="paymentBtn" onclick="payment()" type="submit">결제</button>
-            <button id="paymentHistoryBtn" onclick="paymentHistory()" type="submit">장바구니 이동</button>
+        </div>
+        <div class="col">
+            <button id="paymentHistoryBtn" onclick="paymentHistory()" type="submit">결제목록</button>
+        </div>
+        <div class="col">
+            <button id="cartBtn" onclick="goCart()" type="submit">장바구니</button>
         </div>
     </div>
 </div> <!-- /container -->

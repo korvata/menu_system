@@ -57,6 +57,13 @@ public class OrderController {
     @GetMapping("/order")
     public String orderList(Model model) {
         List<Order> orders = orderService.findAll();
+
+        for(Order order : orders){
+            for(OrderMenu orderMenu : order.getOrderMenus()){
+                log.info("orderMenu : {}", orderMenu.getMenu().getName());
+                log.info("count : {}", orderMenu.getCount());
+            }
+        }
         model.addAttribute("orders", orders);
         log.info("order page");
         return "orders/orderList";
