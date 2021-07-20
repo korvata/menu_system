@@ -5,7 +5,38 @@
 </head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-    function goCart() {
+    function pay() {
+        var checkArr = [];
+        var checkOrderId = [];
+        $("input[name='orderId']:checked").each(function(i) {
+            checkOrderId.push($(this).val());
+        });
+
+        var Data = {
+            orderId: checkOrderId
+            }
+
+        $.ajax({
+            url: '/pay'
+            , type: 'post'
+            , data: Data
+            , success: erasePayment()
+        });
+    }
+
+    function erasePayment(){
+        var checkArr = [];
+        $("input[name='menuId']:checked").each(function(i) {
+            checkArr.push($(this).val());
+            var i = $(this).parents("tr");
+            i.remove();
+        });
+    }
+
+    function paymentList() {
+        location.href = 'payments';
+    }
+    function cartList() {
         location.href = 'cart';
     }
 </script>
@@ -41,13 +72,13 @@
     </div>
     <div class="row">
         <div class="col">
-            <button id="paymentBtn" onclick="payment()" type="submit">결제</button>
+            <button id="paymentBtn" onclick="pay()" type="submit">결제</button>
         </div>
         <div class="col">
-            <button id="paymentHistoryBtn" onclick="paymentHistory()" type="submit">결제목록</button>
+            <button id="paymentHistoryBtn" onclick="paymentList()" type="submit">결제목록</button>
         </div>
         <div class="col">
-            <button id="cartBtn" onclick="goCart()" type="submit">장바구니</button>
+            <button id="cartBtn" onclick="cartList()" type="submit">장바구니</button>
         </div>
     </div>
 </div> <!-- /container -->
