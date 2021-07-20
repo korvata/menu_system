@@ -96,6 +96,6 @@ public class CartController {
             log.info("menu : {}, count : {}", key, carts.get(key));
         }
 
-        log.info("cart canceled!");
+        log.info("cart cleared!");
     }
 }
