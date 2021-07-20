@@ -28,6 +28,10 @@ public class PaymentController {
     public void pay(@RequestParam(value = "orderId[]") List<Long> orderIds) {
 
         for(Long orderId : orderIds){
+            log.info("orderId : {}", orderId);
+        }
+
+        for(Long orderId : orderIds){
             paymentService.pay(orderId);
         }
 
@@ -38,7 +42,7 @@ public class PaymentController {
     @GetMapping("/payments")
     public String payments(Model model) {
 
-        List<Payment> payments = paymentService.findPayments();
+        List<Payment> payments = paymentService.findYPayments();
         model.addAttribute("payments", payments);
 
         log.info("payment page");
