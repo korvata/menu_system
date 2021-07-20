@@ -32,17 +32,20 @@ public class OrderController {
 
         String memberId = loginMember.getId();
 
-        for(Long id : ids){
-            log.info("menuId : {}", id);
-        }
-
-        for(Integer cnt : cnts){
-            log.info("count : {}", cnt);
+        for(int i=0; i< cnts.size(); i++){
+            log.info("menuId : {}", ids.get(i));
+            log.info("count : {}", cnts.get(i));
         }
 
         List<Cart> carts = new ArrayList<>();
 
+        for(int i=0; i < cnts.size(); i++){
+            Cart cart = new Cart();
+            cart.setMenu(menuRepository.findOne(ids.get(i)));
+            cart.setCount(cnts.get(i));
 
+            carts.add(cart);
+        }
 
         Long orderId = orderService.order(memberId, carts);
 
