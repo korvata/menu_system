@@ -35,6 +35,8 @@ public class OrderMenu {
             OrderMenu orderMenu = new OrderMenu();
             orderMenu.setMenu(cart.getMenu());
             orderMenu.setCount(cart.getCount());
+
+            orderMenus.add(orderMenu);
         }
         return orderMenus;
     }
