@@ -40,9 +40,10 @@ public class PaymentController {
 
     //결제내역 조회
     @GetMapping("/payments")
-    public String payments(Model model) {
+    public String payments(Model model,
+                           @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
 
-        List<Payment> payments = paymentService.findYPayments();
+        List<Payment> payments = paymentService.findYPayments(loginMember.getId());
         model.addAttribute("payments", payments);
 
         log.info("payment page");

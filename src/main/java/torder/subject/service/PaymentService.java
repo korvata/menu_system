@@ -3,6 +3,7 @@ package torder.subject.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import torder.subject.domain.Member;
 import torder.subject.domain.Order;
 import torder.subject.domain.Payment;
 import torder.subject.domain.PaymentStatus;
@@ -40,14 +41,14 @@ public class PaymentService {
     }
 
     //결제상태가 Y인 결제내역만 조회
-    public List<Payment> findYPayments(){
+    public List<Payment> findYPayments(String memberId){
 
-        List<Payment> payments = paymentRepository.findAll();
+        List<Payment> payments = findPayments();
 
         List<Payment> paymented = new ArrayList<>();
 
         for(Payment payment : payments){
-            if(payment.getStatus().equals(PaymentStatus.Y)){
+            if(payment.getOrder().getMember().getId().equals(memberId) && payment.getStatus().equals(PaymentStatus.Y)){
                 paymented.add(payment);
             }
         }

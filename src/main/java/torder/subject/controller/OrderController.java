@@ -58,7 +58,7 @@ public class OrderController {
     @GetMapping("/order")
     public String orderList(Model model,
                             @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
-        List<Order> orders = orderService.notPayedOrderList(loginMember);
+        List<Order> orders = orderService.notPayedOrderList(loginMember.getId());
 
         for(Order order : orders){
             for(OrderMenu orderMenu : order.getOrderMenus()){
@@ -66,6 +66,7 @@ public class OrderController {
                 log.info("count : {}", orderMenu.getCount());
             }
         }
+
         model.addAttribute("orders", orders);
         log.info("order page");
         return "orders/orderList";

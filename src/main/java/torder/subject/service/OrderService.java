@@ -49,18 +49,18 @@ public class OrderService {
     }
 
     //전체 주문내역
-    public List<Order> findAll(){
+    public List<Order> findOrders(){
         return orderRepository.findAll();
     }
 
     //결제되지 않은 주문 내역만 조회
-    public List<Order> notPayedOrderList(Member member){
-        List<Order> orders = orderRepository.findAll();
+    public List<Order> notPayedOrderList(String memberId){
+        List<Order> orders = findOrders();
 
         List<Order> orderList = new ArrayList<>();
 
         for(Order order : orders){
-            if(order.getMember().equals(member) && order.getPayment().getStatus().equals(PaymentStatus.N)){
+            if(order.getMember().getId().equals(memberId) && order.getPayment().getStatus().equals(PaymentStatus.N)){
                 orderList.add(order);
             }
         }
