@@ -26,7 +26,7 @@
 
     function erasePayment(){
         var checkArr = [];
-        $("input[name='menuId']:checked").each(function(i) {
+        $("input[name='orderId']:checked").each(function(i) {
             checkArr.push($(this).val());
             var i = $(this).parents("tr");
             i.remove();
