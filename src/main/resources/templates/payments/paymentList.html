@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>결제내역</title>
+</head>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    function menuList() {
+        location.href = 'menus';
+    }
+    function cartList() {
+        location.href = 'cart';
+    }
+    function orderList() {
+        location.href = 'order';
+    }
+</script>
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>결제번호</th>
+                <th>결제내역</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="payment : ${payments}">
+                <td th:text="${payment.id}"></td>
+                <td>
+                    <table>
+                        <tbody>
+                            <tr th:each="orderMenu : ${payment?.order?.orderMenus}">
+                                <td th:text="${orderMenu?.menu?.name}"></td>
+                                <td th:text="${orderMenu?.count}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button id="paymentBtn" onclick="menuList()" type="submit">메뉴</button>
+        </div>
+        <div class="col">
+            <button id="paymentHistoryBtn" onclick="cartList()" type="submit">장바구니</button>
+        </div>
+        <div class="col">
+            <button id="cartBtn" onclick="orderList()" type="submit">주문목록</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
