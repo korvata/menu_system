@@ -25,10 +25,4 @@ public class OrderRepository {
     public List<Order> findAll() {
         return em.createQuery("select o from Order o",Order.class).getResultList();
     }
-
-    @Transactional
-    public void deleteById(Long id){
-        em.createQuery("delete from order where id =:id");
-    }
-
 }
