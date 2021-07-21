@@ -16,9 +16,6 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 class MenuRepositoryTest {
 
-    @PersistenceContext
-    EntityManager em;
-
     @Autowired MenuRepository menuRepository;
 
     @Test
