@@ -16,8 +16,7 @@ create table menu (
         name varchar(255),
         price integer not null,
         primary key (menu_id)
-    ) engine=InnoDB
-	
+    )
 	
 	
 create table order_menu (
@@ -26,9 +25,7 @@ create table order_menu (
         menu_id bigint,
         order_id bigint,
         primary key (order_menu_id)
-    ) engine=InnoDB
-	
-	
+    ) 
 	
 create table orders (
        order_id bigint not null,
@@ -36,17 +33,14 @@ create table orders (
         member_id varchar(255),
         payment_id bigint,
         primary key (order_id)
-    ) engine=InnoDB
-	
-	
+    )
 	
 create table payment (
        payment_id bigint not null,
         status varchar(255),
         primary key (payment_id)
-    ) engine=InnoDB
-		
-
+    )
+    
 alter table order_menu 
    add constraint menu_id 
    foreign key (menu_id) 
