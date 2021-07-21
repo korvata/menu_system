@@ -9,7 +9,7 @@
 
 ### DB 구조
 
-![image](https://user-images.githubusercontent.com/45089402/126480943-bc8e079f-3990-4583-b849-750ddf751f76.png)
+![image](https://user-images.githubusercontent.com/45089402/126485959-4c7aaaee-198b-4aa2-bee4-747455623541.png)
 
 
 ## 2. 코드설명
