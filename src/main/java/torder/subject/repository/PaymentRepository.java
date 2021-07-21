@@ -2,6 +2,7 @@ package torder.subject.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import torder.subject.domain.Order;
 import torder.subject.domain.Payment;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional
 public class PaymentRepository {
 
     private final EntityManager em;
