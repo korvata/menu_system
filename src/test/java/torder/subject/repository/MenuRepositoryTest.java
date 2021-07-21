@@ -30,8 +30,8 @@ class MenuRepositoryTest {
         menuList = menuRepository.findAll();
 
         //then
-        assertThat(menuList.size()).isEqualTo(2);   //통과되지 않음
-        assertThat(menuList.size()).isEqualTo(3);   //통과됨
+        assertThat(menuList.size()).isEqualTo(6);   //통과되지 않음(전체 메뉴는 12개)
+        assertThat(menuList.size()).isEqualTo(12);   //통과됨
 
     }
 }
