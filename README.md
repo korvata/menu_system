@@ -100,9 +100,9 @@ insert into menu values(12, "공기밥", 2000);
 ## 2. 코드설명
 ###domain : 엔티티
 
-@Entity
-@Getter @Setter
-public class Member {
+    @Entity
+    @Getter @Setter
+    public class Member {
     @Id
     @Column(name = "member_id")
     private String id;              //회원 id
@@ -115,10 +115,9 @@ public class Member {
 
 repository : JPA를 사용
 
-@Repository
-@Transactional(readOnly = false)
-public class MemberRepository {
-
+    @Repository
+    @Transactional(readOnly = false)
+    public class MemberRepository {
     @PersistenceContext
     private EntityManager em;			//JPA를 사용하기 위한 EntityManager
 
@@ -146,10 +145,9 @@ public class MemberRepository {
 
 service : 비즈니스 로직 구현
 
-@Service
-@RequiredArgsConstructor
-public class MenuService {
-
+    @Service
+    @RequiredArgsConstructor
+    public class MenuService {
     private final MenuRepository menuRepository;
 
     public List<Menu> findMenus() {			//MenuRepository의 메서드를 이용하여 모든 메뉴를 조회
@@ -162,11 +160,10 @@ public class MenuService {
 
 controller : API 구현
 
-@Slf4j
-@Controller
-@RequiredArgsConstructor
-public class MenuController {
-
+    @Slf4j
+    @Controller
+    @RequiredArgsConstructor
+    public class MenuController {
     private final MenuService menuService;
 
     //메뉴 목록
