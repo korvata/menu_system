@@ -77,3 +77,19 @@ alter table orders
 ## 2. 코드설명
 
 ## 3. 결과 화면
+
+### 홈화면
+![image](https://user-images.githubusercontent.com/45089402/126512247-05c0b77b-f96d-4d94-8359-9e501ad553f3.png)
+
+### 로그인
+![image](https://user-images.githubusercontent.com/45089402/126512342-3f9da318-bc34-4c2d-b20c-1adf0b98cae0.png)
+
+### 메뉴(로그인 성공시)
+![image](https://user-images.githubusercontent.com/45089402/126512641-86d326b0-e2b6-4ebf-978b-acf11ea32729.png)
+
+### 메뉴에서 체크박스 선택 후 장바구니 담기 버튼을 통해 장바구니에 담김(장바구니 담기 버튼 한번 누를때마다 해당 메뉴 수량이 하나씩 증가)
+![image](https://user-images.githubusercontent.com/45089402/126513262-ba9009b0-5749-4f07-b132-bf29e21922a0.png)
+
+### 체크된 메뉴에서 장바구니 담기 3번을 누르고 장바구니 이동을 눌렀을 때
+![image](https://user-images.githubusercontent.com/45089402/126513362-0f7cd7e5-b9e4-4383-ab1a-6be51a302fdf.png)
+
