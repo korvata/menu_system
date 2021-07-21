@@ -2,6 +2,16 @@
 
 ## 1. 설계구조
 
+### 엔티티 구조
+
+![image](https://user-images.githubusercontent.com/45089402/126480792-86769929-c201-4e3b-8fb8-7c22f539e908.png)
+
+
+### DB 구조
+
+![image](https://user-images.githubusercontent.com/45089402/126480943-bc8e079f-3990-4583-b849-750ddf751f76.png)
+
+
 ## 2. 코드설명
 
 ## 3. 결과 화면
