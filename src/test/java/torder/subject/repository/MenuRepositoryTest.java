@@ -22,6 +22,20 @@ class MenuRepositoryTest {
     @Autowired MenuRepository menuRepository;
 
     @Test
+    public void testMenu(){
+        //given
+        List<Menu> menuList = new ArrayList<>();
+
+        //when
+        Menu menu = menuRepository.findOne(1l);
+
+        //then
+        assertThat(menu.getId()).isEqualTo(6l);   //통과되지 않음(이 메뉴 ID는 1l)
+        assertThat(menu.getId()).isEqualTo(1l);   //통과됨
+
+    }
+
+    @Test
     public void testMenus(){
         //given
         List<Menu> menuList = new ArrayList<>();
