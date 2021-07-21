@@ -19,11 +19,23 @@ class OrderRepositoryTest {
     @Test
     public void testOrder(){
         //given
+        Order order = orderRepository.findOne(1l);
+
+        //when
+
+
+        //then
+        assertThat(order.getId()).isEqualTo(4l);   //통과되지 않음(주문 ID는 1l)
+        assertThat(order.getId()).isEqualTo(11);   //통과됨
+    }
+
+    @Test
+    public void testOrders(){
+        //given
         List<Order> orderList = new ArrayList<>();
 
         //when
         orderList = orderRepository.findAll();
-        System.out.println(orderList);
 
         //then
         assertThat(orderList.size()).isEqualTo(4);   //통과되지 않음(주문내역은 총 1건)
