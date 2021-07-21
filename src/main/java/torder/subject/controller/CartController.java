@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import torder.subject.domain.Cart;
 import torder.subject.domain.Member;
-import torder.subject.domain.Menu;
 import torder.subject.service.MenuService;
 import torder.subject.session.SessionConst;
 
