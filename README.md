@@ -61,6 +61,29 @@ alter table orders
    add constraint payment_id 
    foreign key (payment_id) 
    references payment (payment_id)
+   
+   
+### 테스트용 데이터
+#### 사용자
+insert into member values("yjh", "1234");
+insert into member values("torder", "xldhej123");
+insert into member values("asdf", "zxcv!@#");
+insert into member values("zz3131", "qwer1234!");
+
+#### 메뉴
+insert into menu values(1, "진로", 4000);
+insert into menu values(2, "떡볶이", 6000);
+insert into menu values(3, "마라탕", 14000);
+insert into menu values(4, "계란말이", 5000);
+insert into menu values(5, "꿔바로우", 16000);
+insert into menu values(6, "김치찌개", 10000);
+insert into menu values(7, "오꼬노미야끼", 14000);
+insert into menu values(8, "오뎅탕", 12000);
+insert into menu values(9, "참이슬", 4000);
+insert into menu values(10, "테라", 5000);
+insert into menu values(11, "유린기", 16000);
+insert into menu values(12, "공기밥", 2000);
+
 
 ## 1. 설계구조
 
@@ -75,6 +98,87 @@ alter table orders
 
 
 ## 2. 코드설명
+###domain : 엔티티
+
+    @Entity
+    @Getter @Setter
+    public class Member {
+    @Id
+    @Column(name = "member_id")
+    private String id;              //회원 id
+
+    private String pwd;             //회원 패스워드
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>(); //주문내역
+}
+
+repository : JPA를 사용
+
+    @Repository
+    @Transactional(readOnly = false)
+    public class MemberRepository {
+    @PersistenceContext
+    private EntityManager em;			//JPA를 사용하기 위한 EntityManager
+
+    public Member findOne(String id){		//회원 ID를 이용한 단일 조회
+        return em.find(Member.class, id);
+    }
+
+    @Transactional
+    public String save(Member member) {		//Member객체를 영속성 컨텍스트에 저장후 Member객체의 ID를 리턴
+        em.persist(member);
+        return member.getId();
+    }
+
+    public List<Member> findAll() {		//모든 Member객체를 조회하여 리스트로 리턴
+        return em.createQuery("select m from Member m", Member.class)
+                .getResultList();
+    }
+
+    public Optional<Member> findByLoginId(String loginId) {	//로그인한 사용자를 조회
+        return findAll().stream()
+                .filter(m -> m.getId().equals(loginId))
+                .findFirst();
+    }
+}
+
+service : 비즈니스 로직 구현
+
+    @Service
+    @RequiredArgsConstructor
+    public class MenuService {
+    private final MenuRepository menuRepository;
+
+    public List<Menu> findMenus() {			//MenuRepository의 메서드를 이용하여 모든 메뉴를 조회
+        return menuRepository.findAll();
+    }
+    public Menu findOne(Long menuId) {
+        return menuRepository.findOne(menuId);		//MenuRepository의 메서드를 이용하여 메뉴ID를 통하여 메뉴 단건 조회
+    }
+}
+
+controller : API 구현
+
+    @Slf4j
+    @Controller
+    @RequiredArgsConstructor
+    public class MenuController {
+    private final MenuService menuService;
+
+    //메뉴 목록
+    @GetMapping("/menus")								//메뉴 목록을 조회하는 API
+    public String menuList(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember
+                           , Model model) {
+
+        List<Menu> menus = menuService.findMenus();
+        model.addAttribute("menus", menus);
+        log.info("menu page");
+        log.info("memberID = {}", loginMember.getId());
+        return "menus/menuList";
+    }
+}
+
 
 ## 3. 결과 화면
 
