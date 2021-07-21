@@ -47,7 +47,9 @@ public class LoginController {
 
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
-        return "menus/menuList";
+        log.info("{} login!", loginMember.getId());
+
+        return "redirect:/menus";
     }
 
     @PostMapping("/logout")
@@ -58,6 +60,8 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
         }
+
+        log.info("logout!");
 
         return "redirect:/";
     }
