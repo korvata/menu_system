@@ -2,8 +2,6 @@
 
 ## 0. 시작하기전
 ### DDL
-DDL
-
 create table member (
        member_id varchar(255) not null,
         pwd varchar(255),
