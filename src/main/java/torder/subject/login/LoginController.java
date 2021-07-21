@@ -50,7 +50,7 @@ public class LoginController {
         return "redirect:/menus";
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logOut(HttpServletRequest request) {
 
         HttpSession session = request.getSession(false);
