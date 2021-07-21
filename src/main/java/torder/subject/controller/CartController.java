@@ -74,28 +74,20 @@ public class CartController {
     }
 
     //장바구니 메뉴 삭제
-    @PostMapping("/cartcancel")
-    public void cartCancel(@RequestParam(value = "menuArr[]") List<Long> menuArr
+    @PostMapping("/cart/cancel")
+    public void cartCancel(@RequestParam(value = "cancelMenu") Long menuId
             , Model model
             , @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
 
         log.info("memberID = {}", loginMember.getId());
-        log.info("cart cancel start");
+        log.info("{} cancel start!", menuId);
 
-        for(Long menuId : menuArr){
-            log.info("{}",menuId);
-        }
-
-        for(Long menuId : menuArr){
-            if(carts.containsKey(menuId)){
-                carts.remove(menuId);
-            }
-        }
+        carts.remove(menuId);
 
         for(Long key : carts.keySet()){
             log.info("menu : {}, count : {}", key, carts.get(key));
         }
 
-        log.info("cart cleared!");
+        log.info("{} cancel success!", menuId);
     }
 }

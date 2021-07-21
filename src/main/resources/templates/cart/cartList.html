@@ -5,31 +5,32 @@
 </head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-    function cancelMenu(){
-        var checkArr = [];
-        $("input[name='menuId']:checked").each(function(i) {
-            checkArr.push($(this).val());
-            var i = $(this).parents("tr");
-            i.remove();
-        });
+    $(function(){
+        $("button[name='cancelMenu']").click(function(){
+            var cancelMenu = $(this).val();
 
-        $.ajax({
-            url: '/cartcancel'
-            , type: 'post'
-            , dataType: 'text'
-            , data: {
-                menuArr: checkArr
-            }
-        });
-    }
+            console.log(cancelMenu);
 
-    function order() {
+            $(this).parents("tr").remove();
+
+            $.ajax({
+                url: '/cart/cancel'
+                , type: 'post'
+                , dataType: 'text'
+                , data: {
+                    cancelMenu: cancelMenu
+                }
+            });
+        });
+	});
+
+	function order() {
         var checkArr = [];
         var checkMenuId = [];
         var checkCount = [];
-        $("input[name='menuId']:checked").each(function(i) {
+        $("#cartTable tr").each(function(i) {
             checkMenuId.push($(this).val());
-            checkCount.push($(this).parents("tr").children().eq(3).text());
+            checkCount.push($(this).parents("tr").children().eq(2).text());
         });
 
         var Data = {
@@ -53,6 +54,8 @@
     function menuList() {
         location.href = 'menus';
     }
+
+
 </script>
 <body>
 <div class="container">
@@ -60,27 +63,24 @@
         <table>
             <thead>
             <tr>
-                <th>#</th>
                 <th>메뉴명</th>
                 <th>가격</th>
                 <th>수량</th>
             </tr>
             </thead>
             <tbody th:id="cartTable">
-                <tr th:each="cart : ${carts}"  th:id="${cart.menu.id}">
-                    <td><input type="checkbox" th:name="menuId" th:value="${cart.menu.id}" class="form-check-input"></td>
-                    <td th:text="${cart.menu.name}"></td>
-                    <td th:text="${cart.menu.price}"></td>
-                    <td th:text="${cart.count}"></td>
-                </tr>
+            <tr th:each="cart : ${carts}" th:name="menuId">
+                <td th:text="${cart.menu.name}"></td>
+                <td th:text="${cart.menu.price}"></td>
+                <td th:text="${cart.count}"></td>
+                <td><button name="cancelMenu" th:value="${cart.menu.id}" type="submit">메뉴취소</button></td>
+            </tr>
             </tbody>
         </table>
         <table>
             <thead>
             <tr>
-                <th>총 가격</th>
-                <th> </th>
-                <th><button id="cartBtn1" onclick="cancelMenu()" type="submit">메뉴취소</button></th>
+
             </tr>
             </thead>
         </table>
