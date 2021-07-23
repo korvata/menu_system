@@ -1,5 +1,3 @@
-# 티오더 백엔드개발자 채용 과제
-
 ## 0. 시작하기전
 ### DDL
 create table member (
